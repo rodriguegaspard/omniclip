@@ -305,6 +305,14 @@ usage(){
   -h: prints this help section."
 }
 
+case "$*" in
+    *-*-*|*[!a-zA-Z0-9\ ]-*)
+        echo "Error: Multiple flags detected. Only one flag allowed." >&2
+        usage
+        exit 1
+        ;;
+esac
+
 while getopts 'gbiodIODqh' flag; do
   case "${flag}" in
     g) actions_general_mode "$(get_clipboard)" ;;
